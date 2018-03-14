@@ -1,0 +1,9 @@
+app:
+  name: Ubuntu Crypto Price Ticker
+  description: A cryptocurrency price ticker for Ubuntu
+  url: https://github.com/peter-featherstone/ubuntu-crypto-price-ticker
+  version: "1.0.0"
+
+authors:
+  - name: Peter Featherstone
+    email: peter@featherstone.me
