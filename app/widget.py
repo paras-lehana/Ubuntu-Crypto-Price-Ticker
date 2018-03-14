@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import re
+import urllib
 from os.path import abspath, dirname, isfile
+
+import requests
 import yaml
-from gi.repository import Gtk, GLib, GdkPixbuf, GObject
+from gi.repository import Gtk, GLib, GdkPixbuf
+
 try:
     from gi.repository import AppIndicator3 as AppIndicator
 except ImportError:
     from gi.repository import AppIndicator
 
-
-import requests
-
-import urllib, re
 
 PROJECT_ROOT = abspath(dirname(dirname(__file__)))
 PRICE_API = 'https://api.coinmarketcap.com/v1/ticker/{}/?convert=USD'
@@ -33,7 +34,7 @@ class Widget(object):
 
     def start(self):
         self.widget = AppIndicator.Indicator.new(
-            "Ubuntu Crypto Price Ticker" + self.token, 
+            "Ubuntu Crypto Price Ticker " + self.token,
             self.icon, 
             AppIndicator.IndicatorCategory.APPLICATION_STATUS
         )
@@ -80,28 +81,28 @@ class Widget(object):
         self.menu = Gtk.Menu()
 
         self.about_item = Gtk.MenuItem("About")
-        self.quit_item = Gtk.MenuItem("Remove")
-
         self.about_item.connect("activate", self._about)
-        self.quit_item.connect("activate", self._quit)
-
         self.menu.append(self.about_item)
-        self.menu.append(Gtk.SeparatorMenuItem())
+
+        self.quit_item = Gtk.MenuItem("Remove")
+        self.quit_item.connect("activate", self._quit)
         self.menu.append(self.quit_item)
+
         self.menu.show_all()
 
         return self.menu
 
     def _about(self, widget):
         about = Gtk.AboutDialog()
+
         about.set_program_name(self.config['app']['name'])
         about.set_comments(self.config['app']['description'])
         about.set_version(self.config['app']['version'])
         about.set_website(self.config['app']['url'])
-        authors = []
-        for author in self.config['authors']:
-            authors.append(author['name'] + ' <' + author['email'] + '>')
-        about.set_authors(authors)
+        about.set_authors([
+            '{} <{}>'.format(author['name'], author['email'])
+            for author in self.config['authors']
+        ])
 
         about.set_license_type(Gtk.License.MIT_X11)
         about.set_logo(GdkPixbuf.Pixbuf.new_from_file(self.icon))
