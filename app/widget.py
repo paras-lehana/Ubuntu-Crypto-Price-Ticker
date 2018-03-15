@@ -3,19 +3,12 @@
 
 import re
 import urllib
-from os.path import abspath, dirname, isfile
 
 import requests
-import yaml
-from gi.repository import Gtk, GLib, GdkPixbuf
+from config import PROJECT_ROOT
+from gi.repository import AppIndicator3, GLib, Gtk
+from os.path import isfile
 
-try:
-    from gi.repository import AppIndicator3 as AppIndicator
-except ImportError:
-    from gi.repository import AppIndicator
-
-
-PROJECT_ROOT = abspath(dirname(dirname(__file__)))
 PRICE_API = 'https://api.coinmarketcap.com/v1/ticker/{}/?convert=USD'
 IMAGE_PAGE_URL = 'https://coinmarketcap.com/currencies/{}/'
 IMAGE_URL = 'https://s2.coinmarketcap.com/static/img/coins/32x32/\d+.png'
@@ -24,35 +17,26 @@ REFRESH_TIME_IN_SECONDS = 600
 
 class Widget(object):
 
-    config = yaml.load(open(PROJECT_ROOT + '/config.yaml', 'r'))
-    config['project_root'] = PROJECT_ROOT
-    icon = config['project_root'] + '/static/icon.png'
+    icon = PROJECT_ROOT + '/static/icon.png'
 
-    def __init__(self, main, token):
-        self.main = main
+    def __init__(self, token):
         self.token = token.lower()
-
-    def start(self):
-        self.widget = AppIndicator.Indicator.new(
+        self.widget = AppIndicator3.Indicator.new(
             "Ubuntu Crypto Price Ticker " + self.token,
             self.icon, 
-            AppIndicator.IndicatorCategory.APPLICATION_STATUS
+            AppIndicator3.IndicatorCategory.APPLICATION_STATUS
         )
-        self.widget.set_status(AppIndicator.IndicatorStatus.ACTIVE)
+        self.widget.set_status(
+            AppIndicator3.IndicatorStatus.ACTIVE
+        )
         self.widget.set_menu(self._menu())
 
         self._set_label_image()
         self._set_price()
 
-    def stop(self):
-        del self.widget
-
-        if self.timeout_id:
-            GLib.source_remove(self.timeout_id)
-
     def _set_label_image(self):
         token_image_location = '{}/static/token_icons/{}.png'.format(
-            self.config['project_root'], self.token
+            PROJECT_ROOT, self.token
         )
 
         if not isfile(token_image_location):
@@ -78,36 +62,4 @@ class Widget(object):
         )
 
     def _menu(self):
-        self.menu = Gtk.Menu()
-
-        self.about_item = Gtk.MenuItem("About")
-        self.about_item.connect("activate", self._about)
-        self.menu.append(self.about_item)
-
-        self.quit_item = Gtk.MenuItem("Remove")
-        self.quit_item.connect("activate", self._quit)
-        self.menu.append(self.quit_item)
-
-        self.menu.show_all()
-
-        return self.menu
-
-    def _about(self, widget):
-        about = Gtk.AboutDialog()
-
-        about.set_program_name(self.config['app']['name'])
-        about.set_comments(self.config['app']['description'])
-        about.set_version(self.config['app']['version'])
-        about.set_website(self.config['app']['url'])
-        about.set_authors([
-            '{} <{}>'.format(author['name'], author['email'])
-            for author in self.config['authors']
-        ])
-
-        about.set_license_type(Gtk.License.MIT_X11)
-        about.set_logo(GdkPixbuf.Pixbuf.new_from_file(self.icon))
-        about.set_keep_above(True)
-        about.run()
-
-    def _quit(self, widget):
-        self.main._remove_ticker(self.token)
+        return Gtk.Menu()
