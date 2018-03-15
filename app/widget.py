@@ -29,7 +29,7 @@ class Widget(object):
         self.widget.set_status(
             AppIndicator3.IndicatorStatus.ACTIVE
         )
-        self.widget.set_menu(self._menu())
+        self.widget.set_menu(Gtk.Menu())
 
         self._set_label_image()
         self._set_price()
@@ -61,5 +61,5 @@ class Widget(object):
             REFRESH_TIME_IN_SECONDS, self._set_price
         )
 
-    def _menu(self):
-        return Gtk.Menu()
+    def resume(self):
+        self._set_price()
