@@ -13,7 +13,7 @@ class Menu(object):
 
     def __init__(self):
         self.widget = AppIndicator3.Indicator.new(
-            "Ubuntu Crypto Price Ticker Main",
+            'Ubuntu Crypto Price Ticker Main',
             self.icon,
             AppIndicator3.IndicatorCategory.APPLICATION_STATUS
         )
@@ -28,12 +28,12 @@ class Menu(object):
     def _menu(self):
         menu = Gtk.Menu()
 
-        about = Gtk.MenuItem("About")
-        about.connect("activate", self._about)
+        about = Gtk.MenuItem('About')
+        about.connect('activate', self._about)
         menu.append(about)
 
-        quit = Gtk.MenuItem("Quit")
-        quit.connect("activate", self._quit)
+        quit = Gtk.MenuItem('Quit')
+        quit.connect('activate', self._quit)
         menu.append(quit)
 
         menu.show_all()

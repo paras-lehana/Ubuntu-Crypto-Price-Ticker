@@ -22,7 +22,7 @@ class Widget(object):
     def __init__(self, token):
         self.token = token.lower()
         self.widget = AppIndicator3.Indicator.new(
-            "Ubuntu Crypto Price Ticker " + self.token,
+            "Ubuntu Crypto Price Ticker {}".format(self.token),
             self.icon, 
             AppIndicator3.IndicatorCategory.APPLICATION_STATUS
         )
