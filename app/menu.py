@@ -28,13 +28,13 @@ class Menu(object):
     def _menu(self):
         menu = Gtk.Menu()
 
-        about_item = Gtk.MenuItem("About")
-        about_item.connect("activate", self._about)
-        menu.append(about_item)
+        about = Gtk.MenuItem("About")
+        about.connect("activate", self._about)
+        menu.append(about)
 
-        quit_item = Gtk.MenuItem("Quit")
-        quit_item.connect("activate", self._quit)
-        menu.append(quit_item)
+        quit = Gtk.MenuItem("Quit")
+        quit.connect("activate", self._quit)
+        menu.append(quit)
 
         menu.show_all()
 
