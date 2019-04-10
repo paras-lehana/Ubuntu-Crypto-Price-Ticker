@@ -34,7 +34,7 @@ be great and would serve others well.
 
 * I have changed the decimal precison to none. If you want to include, remove `int` conversion in `self.widget.set_label` in `app/widgets.py` and change precison from 0 to (for example, back to) 2.
 * You can add other configuration in example.yaml file by adding more commas. Be sure to use the fields in `__init__` in `app/widgets.py` after conf has been split. 
-* Renamed `tokens-example.yaml` to `tokens.yaml` by default.
+* Renamed `tokens-example.yaml` to `tokens.yaml` by default. Removed `tokens.yaml` from `.gitignore` as well due to added inline guide. Consider adding it again if you are pushing changes not related to it. 
 * Do contact me for any more suggestion or additions. I'll be happy to add those. I'm grateful to peter-featherstone for this awesome widget.  
 
 **Improved Guide for defining Tokens in tokens.yaml:**

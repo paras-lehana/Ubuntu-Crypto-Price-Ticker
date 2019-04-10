@@ -1,0 +1,18 @@
+# Define your token ids here.
+# Token ids are generally same as coin name.
+# Replace space by hyphen in multiword token names. For example, basic-attention-token
+# Find exact ids on CMC's token page url. For example, coinmarketcap.com/currencies/basic-attention-token/
+
+# As per fork by paras-lehana:
+  
+  # You can define conversion currency as <coin-id>,<conversion currency>.
+  # For example, 'Ethereum,INR' will show Ethereum price in Indian Rupees. 
+  # Both crypto-currency and fiat are supported for conversion as per CMC data.
+  # Satoshis is also supported. Use 'SAT' for the same.    
+
+# More information and support in https://github.com/paras-lehana/Ubuntu-Crypto-Price-Ticker
+
+tokens:
+  Bitcoin,INR
+  Ethereum,INR
+  bgogo-token,SAT
