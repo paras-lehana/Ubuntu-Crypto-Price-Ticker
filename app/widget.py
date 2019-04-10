@@ -11,8 +11,8 @@ from os.path import isfile
 
 PRICE_API = 'https://api.coinmarketcap.com/v1/ticker/{}/?convert={}'
 IMAGE_PAGE_URL = 'https://coinmarketcap.com/currencies/{}/'
-IMAGE_URL = 'https://s2.coinmarketcap.com/static/img/coins/32x32/\d+.png'
-REFRESH_TIME_IN_SECONDS = 60
+IMAGE_URL = 'https://s2.coinmarketcap.com/static/img/coins/64x64/\d+.png'
+REFRESH_TIME_IN_SECONDS = 5
 
 currency_symbol = dict(usd='$', eur='€', inr='₹', btc='฿', eth='Ξ',sat='シ')
 
