@@ -37,13 +37,15 @@ be great and would serve others well.
 * Renamed `tokens-example.yaml` to `tokens.yaml` by default. Removed `tokens.yaml` from `.gitignore` as well due to added inline guide. Consider adding it again if you are pushing changes not related to it. 
 * Do contact me for any more suggestion or additions. I'll be happy to add those. I'm grateful to peter-featherstone for this awesome widget.  
 
-**Improved Guide for defining Tokens in tokens.yaml:**
+**Improved Guide:**
 
 * You can find brief guide to help yourself adding new tokens in tokens.yaml.
 * You need to define Token ID in the file as CMC API doesn't support symbols yet. 
 * Token ids are generally same as coin name in lowercase. Replace space by hyphen in multiword token names. For example, `basic-attention-token` for Basic Attention Token (BAT)
 * Find exact ids on CMC's token page url. For example, `coinmarketcap.com/currencies/basic-attention-token/`
 * You can change refresh time in seconds by changing `REFRESH_TIME_IN_SECONDS` variable in `app/widget.py` file. Default is 10 mins so you may want to consider changing it. 
+* If you want the script to autorun on startup, open 'Startup Applications' and type command `cd <installation_directory> && make` where installation_directory is the absolute path of the directory where you have forked my repo. There are others ways like /etc/init and startup scripts to do this too. 
+* This repo by Peter Featherstone has many features so do ask me or post your queries by opening an Issue. I'll add the points here as well as promptly reply to the created ones. We need community help to make this project great again!
 
 
 **Support for other conversion currencies including Satoshis:**
