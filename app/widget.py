@@ -55,10 +55,14 @@ class Widget(object):
         response = requests.get(PRICE_API.format(self.token,self.convert))
         token_data = response.json()[0]
 
-        self.widget.set_label(
-            ' {}{}'.format(currency_symbol[self.convert] if self.convert in currency_symbol else '',int(round(float(token_data['price_'+str(self.convert) if self.convert != 'sat' else 'price_btc'])*(1 if self.convert != 'sat' else 100000000),0))),
-            self.token
+        token_key = 'price_btc' if self.convert == 'sat' else 'price_' + str(self.convert)
+        amount = token_data[token_key] * (100000000 if self.convert == 'sat' else 1)
+        price_string = ' {}{}'.format(
+            currency_symbol.get(self.convert, ''),
+            int(round(float(amount), 0))
         )
+
+        self.widget.set_label(price_string, self.token)
 
         self.timeout_id = GLib.timeout_add_seconds(
             REFRESH_TIME_IN_SECONDS, self._set_price
