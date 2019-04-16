@@ -56,7 +56,7 @@ class Widget(object):
         token_data = response.json()[0]
 
         token_key = 'price_btc' if self.convert == 'sat' else 'price_' + str(self.convert)
-        amount = token_data[token_key] * (100000000 if self.convert == 'sat' else 1)
+        amount = float(token_data[token_key]) * (100000000 if self.convert == 'sat' else 1)
         price_string = ' {}{}'.format(
             currency_symbol.get(self.convert, ''),
             int(round(float(amount), 0))
