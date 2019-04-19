@@ -5,14 +5,18 @@
 
 # As per fork by paras-lehana:
   
-  # You can define conversion currency as <coin-id>,<conversion currency>.
-  # For example, 'Ethereum,INR' will show Ethereum price in Indian Rupees. 
+  # You can define conversion currency and precision as <coin-id>,<conversion currency>,<precision>.
+  # Coversion: For example, 'Ethereum,INR' will show Ethereum price in Indian Rupees.  
+  # Default conversion is 'USD'
   # Both crypto-currency and fiat are supported for conversion as per CMC data.
-  # Satoshis is also supported. Use 'SAT' for the same.    
-
+  # Satoshis is also supported. Use 'SAT' for the same.  
+  # Precision: For example, 'Ethereum,USD,0' will show Ethereum price in US Dollars with 0 decimal places. So, a price of $172.11 will round off to $172
+  # Default precision is 2 (two decimal places). 
+  # Make sure to put precision after 2 commas. 'Bitcoin,,0' is also supported where conversion will be assumed default (USD).
+  
 # More information and support in https://github.com/paras-lehana/Ubuntu-Crypto-Price-Ticker
 
 tokens:
-  Bitcoin,INR
-  Ethereum,INR
+  Bitcoin,USD,0
+  Ethereum,,2
   bgogo-token,SAT
