@@ -55,3 +55,13 @@ be great and would serve others well.
 * You can define conversion currency as `<coin-id>,<conversion currency>`. For example, `Ethereum,INR` will show Ethereum price in Indian Rupees. 
 * Both crypto-currency and fiat are supported for conversion as per CMC data. For example, you can use `Ripple,EUR` as well as `Ripple,BTC`.
 * I have added a local array `currency_symbol` in `app/widget.py` file that countains symbol for different currencies (including crypto). Consider contributing into it or suggest me a suitable python library. I have used `シ` symbol for Satoshi. You change it to whatever you like. 
+
+**Support for other conversion currencies including Satoshis:**
+
+> April 19, 2019
+> Discussion: https://github.com/peter-featherstone/Ubuntu-Crypto-Price-Ticker/pull/1#pullrequestreview-227912044
+
+* I have added support for defining precision for displayed prices. 
+* You can define precision after 2nd comma as `<coin-id>,<conversion currency>,<precision>`. For example, `Ethereum,USD,0` will show Ethereum price in US Dollars with 0 decimal places. So, a price of $172.11 will round off to $172.
+* Default precision is 2 (two decimal places). 
+* Make sure to put precision after 2 commas. `Bitcoin,,0` is also supported where conversion will be assumed default (USD).
